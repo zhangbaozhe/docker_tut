@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Docker </title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- start -->
+			<section>
+				<section>
+					<h2 class="r-fit-text">Tech Tutorial</h2>
+					<p>Baozhe Zhang</p>
+					<p>Date: TODO</p>
+				</section>
+				<section>
+					<h2 class="r-fit-text">Empowering Your Robotics Research<br>With</h2>
+				</section>
+				<section>
+					<img class="current-visible" src="images/horizontal-logo-monochromatic-white.png" width="100%" />
+				</section>
+			</section>
+
+			<!-- contents -->
+			<section data-markdown>
+				<textarea data-template>
+						## Contents
+						- Introduction
+							- What is Docker? 
+							- Why/When you should use it?
+						- Case study 0: Setup a containerized development environment (including GUI application)
+						- Case study 1: Multi-robot simulation on a single machine
+						- Case study 2: Test your application's parameters with distribute computation
+						<aside class="notes">
+						</aside>
+					</textarea>
+			</section>
+
+
+			<!-- Intro: what -->
+			<section>
+				<section data-markdown>
+					<textarea data-template>
+						## 🧐 What is Docker
+
+						- A light-weight virtual machine?
+						- Docker image v.s. bootable OS image?
+						- Docker container v.s. runtime virtual machine?
+					</textarea>
+				</section>
+
+
+				<section data-markdown>
+					<textarea data-template>
+
+						### 🤓 Virtual Machine v.s. Docker
+
+						<img class="current-visible" src="images/docker_vm.png" width="100%" />
+
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 🤓 Docker Image
+
+						<img class="current-visible" src="images/docker_vm.png" width="50%" />
+
+						> A Docker image is an <span style="color:red">**isolated filesystem**</span> containing all dependencies, configurations, scripts, binaries, etc for your container application. 
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 🤓 Docker Container
+
+						<img class="current-visible" src="images/docker_vm.png" width="50%" />
+
+						> A container is a <span style="color:red">**sandboxed process**</span> on your machine that is <span style="color:red">**isolated**</span> from all other processes on the host machine. 
+
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+
+						### 🤓 Docker Architecture
+
+						<img class="current-visible" src="images/architecture.svg" width="100%" />
+
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+
+						### 🤠 Why / When to use it?
+						
+						- Build once and deploy N times 
+							- Multiple physical robots 
+							- Distributed computation (simulation)
+						- Need to setup a complex programming environment
+							- ROS, OpenCV, pytorch, boost, ... all needed
+						- Package "pollution"
+							- Feature test for third-party packages
+							- Avoiding "polluting" you system dependencies (apt)
+						- ...
+
+					</textarea>
+				</section>
+			</section>
+
+			<!-- Case 0: Setup a containerized development environment (including GUI application) -->
+			<section>
+				<section data-markdown>
+					<textarea data-template>
+						## 👶 Case study 0: <br>Setup a containerized development environment (including GUI application)
+
+						- Gazebo simulation
+						- <span style="color:gold">`docker xxx`</span> commands
+						- Dockerfile and <span style="color:gold">`docker build`</span>
+						- GUI application workaround
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 👶 Get a remote image via <br><span style="color:gold">`docker pull`</span>
+
+						We will use the official ROS image as our base image. 
+
+						```text
+						$ docker pull osrf/ros:noetic-desktop-full
+						```
+						
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 👶 (0) Run it via <br><span style="color:gold">`docker run`</span>
+
+						```text
+						$ docker run --rm -it --name ros osrf/ros:noetic-desktop-full bash
+
+						--rm    ->     the container will be removed
+						-it     =      -i -t 
+						  -i    ->     interactive 
+						  -t    ->     pseudo tty
+						--name  ->     assign a name
+
+						bash    ->     the init process
+						```
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 👶 (1) Run it via <br><span style="color:gold">`docker run`</span>
+
+						Expected prompt: 
+						```bash
+						root@44648b1a5b07:/#
+						```
+						Run an app (GUI failed)
+						```
+						root@44648b1a5b07:/# gazebo --verbose
+						Gazebo multi-robot simulator, version 11.11.0
+						Copyright (C) 2012 Open Source Robotics Foundation.
+						Released under the Apache 2 License.
+						http://gazebosim.org
+
+						[Msg] Waiting for master.
+						Gazebo multi-robot simulator, version 11.11.0
+						Copyright (C) 2012 Open Source Robotics Foundation.
+						Released under the Apache 2 License.
+						http://gazebosim.org
+
+						[Msg] Waiting for master.
+						[Msg] Connected to gazebo master @ http://127.0.0.1:11345
+						[Msg] Publicized address: 172.17.0.2
+						[Err] [RenderEngine.cc:749] Can't open display: 
+						[Wrn] [RenderEngine.cc:89] Unable to create X window. Rendering will be disabled
+						[Wrn] [RenderEngine.cc:292] Cannot initialize render engine since render path type is NONE. Ignore this warning ifrendering has been turned off on purpose.
+						[Msg] Loading world file [/usr/share/gazebo-11/worlds/empty.world]
+						[Msg] Connected to gazebo master @ http://127.0.0.1:11345
+						[Msg] Publicized address: 172.17.0.2
+						[Wrn] [GuiIface.cc:298] Couldn't locate specified .ini. Creating file at "/root/.gazebo/gui.ini"
+						[Err] [RenderEngine.cc:749] Can't open display: 
+						[Wrn] [RenderEngine.cc:89] Unable to create X window. Rendering will be disabled
+						[Wrn] [RenderEngine.cc:292] Cannot initialize render engine since render path type is NONE. Ignore this warning ifrendering has been turned off on purpose.
+						[Wrn] [GuiIface.cc:120] could not connect to display 
+						[Msg] Could not load the Qt platform plugin "xcb" in "" even though it was found.
+						[Err] [GuiIface.cc:124] This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+						Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, xcb.
+						```
+
+
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 👶 Check status via <br><span style="color:gold">`docker stats`</span>
+
+						```text
+						$ docker stats
+						```
+						Expected: 
+						```text
+						CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O        PIDS
+44648b1a5b07   ros       0.00%     93.62MiB / 39.03GiB   0.23%     22.8kB / 57.5kB   182MB / 28.7kB   1
+						```
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 👶 What about the GUI?
+
+						Options: 
+						- (Linux) X11 forwarding GUI application
+							- Nvidia problem
+						- (Possibly all platform) Desktop environment forwarding through network
+
+						We'll cover both by building customized images. 
+
+						
+					</textarea>
+				</section>
+
+				<!-- Dockerfile -->
+
+				<section data-markdown>
+					<textarea data-template>
+						### 👶 (0) Dockerfile 101
+
+						```text
+						Dockerfile => Docker image => Docker container
+						           ^^              ^^
+						           build           run
+						```
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 👶 (1) Dockerfile 101 -- Build an image
+						<pre><code data-line-numbers data-trim data-noescape>
+FROM ubuntu:20.04 # image:tag
+RUN apt-get update \
+ && apt-get install -y locales lsb-release
+ARG DEBIAN_FRONTEND=noninteractive
+RUN dpkg-reconfigure locales
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ros-noetic-desktop-full
+RUN apt-get install -y --no-install-recommends python3-rosdep
+RUN rosdep init \
+ && rosdep fix-permissions \
+ && rosdep update
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+							</code></pre>
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 👶 (2) Dockerfile 101 -- Build an image
+
+						```text
+						$ docker build -t ros:noetic .
+						```
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 👶 (2) Dockerfile 101
+
+						```text
+						$ docker build -t ros:noetic .
+						```
+					</textarea>
+				</section>
+
+
+			</section>
+
+			<!-- Case 1:  -->
+			<section>
+				<section data-markdown>
+					<textarea data-template>
+						## 👦 Case study 1: <br>Multi-robot simulation on a single machine
+
+						- Docker network and storage
+						- Two container: Gazebo and controller
+						
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## 👦 Case study 1: <br>Multi-
+
+						- Docker network and storage
+						- Two container: Gazebo and controller
+						
+					</textarea>
+				</section>
+			</section>
+
+			<!-- Case 2: Test your application's parameters with distribute computation -->
+			<section>
+				<section data-markdown>
+					<textarea data-template>
+						## 👨‍🎓 Case study 2: <br>Test your application's parameters with distribute computation
+
+						- Docker compose
+						- Distributed simulations
+
+					</textarea>
+				</section>
+			</section>
+		</div>
+	</div>
+
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/zoom/zoom.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			slideNumber: 'c/t', 
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom]
+		});
+
+	</script>
+
+</body>
+
+</html>
