@@ -1,0 +1,835 @@
+version: '3'
+services:
+  w0:
+    image: baozhe_mpc:compose
+    networks: 
+      - w0
+    command: 0 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w1:
+    image: baozhe_mpc:compose
+    networks: 
+      - w1
+    command: 1 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w2:
+    image: baozhe_mpc:compose
+    networks: 
+      - w2
+    command: 2 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w3:
+    image: baozhe_mpc:compose
+    networks: 
+      - w3
+    command: 3 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w4:
+    image: baozhe_mpc:compose
+    networks: 
+      - w4
+    command: 4 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w5:
+    image: baozhe_mpc:compose
+    networks: 
+      - w5
+    command: 5 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w6:
+    image: baozhe_mpc:compose
+    networks: 
+      - w6
+    command: 6 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w7:
+    image: baozhe_mpc:compose
+    networks: 
+      - w7
+    command: 7 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w8:
+    image: baozhe_mpc:compose
+    networks: 
+      - w8
+    command: 8 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w9:
+    image: baozhe_mpc:compose
+    networks: 
+      - w9
+    command: 9 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w10:
+    image: baozhe_mpc:compose
+    networks: 
+      - w10
+    command: 10 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w11:
+    image: baozhe_mpc:compose
+    networks: 
+      - w11
+    command: 11 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w12:
+    image: baozhe_mpc:compose
+    networks: 
+      - w12
+    command: 12 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w13:
+    image: baozhe_mpc:compose
+    networks: 
+      - w13
+    command: 13 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w14:
+    image: baozhe_mpc:compose
+    networks: 
+      - w14
+    command: 14 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w15:
+    image: baozhe_mpc:compose
+    networks: 
+      - w15
+    command: 15 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w16:
+    image: baozhe_mpc:compose
+    networks: 
+      - w16
+    command: 16 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w17:
+    image: baozhe_mpc:compose
+    networks: 
+      - w17
+    command: 17 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w18:
+    image: baozhe_mpc:compose
+    networks: 
+      - w18
+    command: 18 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w19:
+    image: baozhe_mpc:compose
+    networks: 
+      - w19
+    command: 19 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w20:
+    image: baozhe_mpc:compose
+    networks: 
+      - w20
+    command: 20 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w21:
+    image: baozhe_mpc:compose
+    networks: 
+      - w21
+    command: 21 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w22:
+    image: baozhe_mpc:compose
+    networks: 
+      - w22
+    command: 22 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w23:
+    image: baozhe_mpc:compose
+    networks: 
+      - w23
+    command: 23 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w24:
+    image: baozhe_mpc:compose
+    networks: 
+      - w24
+    command: 24 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w25:
+    image: baozhe_mpc:compose
+    networks: 
+      - w25
+    command: 25 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w26:
+    image: baozhe_mpc:compose
+    networks: 
+      - w26
+    command: 26 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w27:
+    image: baozhe_mpc:compose
+    networks: 
+      - w27
+    command: 27 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w28:
+    image: baozhe_mpc:compose
+    networks: 
+      - w28
+    command: 28 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w29:
+    image: baozhe_mpc:compose
+    networks: 
+      - w29
+    command: 29 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w30:
+    image: baozhe_mpc:compose
+    networks: 
+      - w30
+    command: 30 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w31:
+    image: baozhe_mpc:compose
+    networks: 
+      - w31
+    command: 31 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w32:
+    image: baozhe_mpc:compose
+    networks: 
+      - w32
+    command: 32 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w33:
+    image: baozhe_mpc:compose
+    networks: 
+      - w33
+    command: 33 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w34:
+    image: baozhe_mpc:compose
+    networks: 
+      - w34
+    command: 34 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w35:
+    image: baozhe_mpc:compose
+    networks: 
+      - w35
+    command: 35 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w36:
+    image: baozhe_mpc:compose
+    networks: 
+      - w36
+    command: 36 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w37:
+    image: baozhe_mpc:compose
+    networks: 
+      - w37
+    command: 37 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w38:
+    image: baozhe_mpc:compose
+    networks: 
+      - w38
+    command: 38 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w39:
+    image: baozhe_mpc:compose
+    networks: 
+      - w39
+    command: 39 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w40:
+    image: baozhe_mpc:compose
+    networks: 
+      - w40
+    command: 40 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w41:
+    image: baozhe_mpc:compose
+    networks: 
+      - w41
+    command: 41 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w42:
+    image: baozhe_mpc:compose
+    networks: 
+      - w42
+    command: 42 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w43:
+    image: baozhe_mpc:compose
+    networks: 
+      - w43
+    command: 43 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w44:
+    image: baozhe_mpc:compose
+    networks: 
+      - w44
+    command: 44 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w45:
+    image: baozhe_mpc:compose
+    networks: 
+      - w45
+    command: 45 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w46:
+    image: baozhe_mpc:compose
+    networks: 
+      - w46
+    command: 46 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w47:
+    image: baozhe_mpc:compose
+    networks: 
+      - w47
+    command: 47 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w48:
+    image: baozhe_mpc:compose
+    networks: 
+      - w48
+    command: 48 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w49:
+    image: baozhe_mpc:compose
+    networks: 
+      - w49
+    command: 49 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w50:
+    image: baozhe_mpc:compose
+    networks: 
+      - w50
+    command: 50 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w51:
+    image: baozhe_mpc:compose
+    networks: 
+      - w51
+    command: 51 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w52:
+    image: baozhe_mpc:compose
+    networks: 
+      - w52
+    command: 52 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w53:
+    image: baozhe_mpc:compose
+    networks: 
+      - w53
+    command: 53 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w54:
+    image: baozhe_mpc:compose
+    networks: 
+      - w54
+    command: 54 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w55:
+    image: baozhe_mpc:compose
+    networks: 
+      - w55
+    command: 55 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w56:
+    image: baozhe_mpc:compose
+    networks: 
+      - w56
+    command: 56 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w57:
+    image: baozhe_mpc:compose
+    networks: 
+      - w57
+    command: 57 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w58:
+    image: baozhe_mpc:compose
+    networks: 
+      - w58
+    command: 58 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w59:
+    image: baozhe_mpc:compose
+    networks: 
+      - w59
+    command: 59 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w60:
+    image: baozhe_mpc:compose
+    networks: 
+      - w60
+    command: 60 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w61:
+    image: baozhe_mpc:compose
+    networks: 
+      - w61
+    command: 61 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w62:
+    image: baozhe_mpc:compose
+    networks: 
+      - w62
+    command: 62 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'       
+  w63:
+    image: baozhe_mpc:compose
+    networks: 
+      - w63
+    command: 63 64 0.05
+    volumes: 
+      - /home/a210zbz/landing_docker/Docker/build/data:/root/data/
+      - /etc/localtime:/etc/localtime
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '2'
+networks:
+  w0:
+  w1:
+  w2:
+  w3:
+  w4:
+  w5:
+  w6:
+  w7:
+  w8:
+  w9:
+  w10:
+  w11:
+  w12:
+  w13:
+  w14:
+  w15:
+  w16:
+  w17:
+  w18:
+  w19:
+  w20:
+  w21:
+  w22:
+  w23:
+  w24:
+  w25:
+  w26:
+  w27:
+  w28:
+  w29:
+  w30:
+  w31:
+  w32:
+  w33:
+  w34:
+  w35:
+  w36:
+  w37:
+  w38:
+  w39:
+  w40:
+  w41:
+  w42:
+  w43:
+  w44:
+  w45:
+  w46:
+  w47:
+  w48:
+  w49:
+  w50:
+  w51:
+  w52:
+  w53:
+  w54:
+  w55:
+  w56:
+  w57:
+  w58:
+  w59:
+  w60:
+  w61:
+  w62:
+  w63:

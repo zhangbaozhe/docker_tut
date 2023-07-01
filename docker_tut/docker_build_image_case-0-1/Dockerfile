@@ -1,11 +1,10 @@
-
-FROM danielguerra/ubuntu-xrdp:20.04
-# Original author: Daniel Guerra
-# Modified by: Baozhe Zhang
+# zhangbaozhe/ros:noetic
+# image:tag
+FROM ubuntu:20.04 
 
 # Install packages
 RUN apt-get update \
- && apt-get install -y locales lsb-release
+ && apt-get install -y locales lsb-release gnupg2
 ARG DEBIAN_FRONTEND=noninteractive
 RUN dpkg-reconfigure locales
 # Install ROS Noetic
@@ -18,6 +17,3 @@ RUN rosdep init \
  && rosdep fix-permissions \
  && rosdep update
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-
-
-

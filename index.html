@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>Docker </title>
+  <title>Docker Tutorial</title>
 
   <link rel="stylesheet" href="dist/reset.css">
   <link rel="stylesheet" href="dist/reveal.css">
@@ -261,9 +261,9 @@
           <textarea data-template>
             ### 👶 (1) Dockerfile 101 -- Build an image
             <pre><code data-line-numbers data-trim data-noescape>
-FROM ubuntu:20.04 # image:tag
+FROM ubuntu:20.04
 RUN apt-get update \
- && apt-get install -y locales lsb-release
+ && apt-get install -y locales lsb-release gnupg2
 ARG DEBIAN_FRONTEND=noninteractive
 RUN dpkg-reconfigure locales
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -286,19 +286,224 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
             ```text
             $ docker build -t ros:noetic .
             ```
+            (or you call pull it)
+            ```text
+            $ docker pull zhangbaozhe/ros:noetic
+            ```
           </textarea>
         </section>
 
         
         <section data-markdown>
           <textarea data-template>
-            ### 👶 (2) Dockerfile 101
+            ### 👶 (3) Dockerfile 101 -- Enable remote desktop GUI
+            
+            <pre><code data-trim data-noescape data-line-numbers="1, 2, 3">
+FROM danielguerra/ubuntu-xrdp:20.04 
+RUN apt-get update \
+ && apt-get install -y locales lsb-release
+ARG DEBIAN_FRONTEND=noninteractive
+RUN dpkg-reconfigure locales
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ros-noetic-desktop-full
+RUN apt-get install -y --no-install-recommends python3-rosdep
+RUN rosdep init \
+ && rosdep fix-permissions \
+ && rosdep update
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc              
+            </code></pre>
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (4) Dockerfile 101 -- Enable remote desktop GUI
 
             ```text
-            $ docker build -t ros:noetic .
+            $ docker build -t ros_xrdp:noetic .
+            ```
+            (or you call pull it)
+            ```text
+            $ docker pull zhangbaozhe/ros_xrdp:noetic
             ```
           </textarea>
         </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (5) Dockerfile 101 -- Enable remote desktop GUI
+
+            Demo (127.0.0.1:3389)
+
+            This workaround uses xrdp. Others may use different technique. 
+            You may even run your desktop GUI in a browser!
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (6) Dockerfile 101 -- X11
+
+            <img class="current-visible" src="images/x.svg" width="30%"/>
+            
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (7) Dockerfile 101 -- X11 forwarding
+
+            <pre><code data-trim data-noescape data-line-numbers="2,3,4">
+            $ docker run -it --net=host \
+            --env="DISPLAY" \ 
+            --env="QT_X11_NO_MITSHM=1" \
+            --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \ 
+            --rm \ 
+            osrf/ros:noetic-desktop-full \
+            bash -it -c "roslaunch gazebo_ros empty_world.launch"
+            </code></pre> 
+
+            
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (8) Dockerfile 101 -- X11 forwarding
+
+            FPS is not high, right?
+
+            <span style="color:red"> GPU</span> problem!
+            
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (9) Dockerfile 101 -- X11 forwarding on <br>Integrated GPU
+
+            <pre><code data-trim data-noescape data-line-numbers="2">
+            $ docker run -it --net=host \
+            --device=/dev/dri:/dev/dri \
+            --env="DISPLAY" \ 
+            --env="QT_X11_NO_MITSHM=1" \
+            --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \ 
+            --rm \ 
+            osrf/ros:noetic-desktop-full \
+            bash -it -c "roslaunch gazebo_ros empty_world.launch"
+            </code></pre> 
+            
+            Usually, no need to rebuild.
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (*) Dockerfile 101 -- X11 forwarding on <br>Nvidia GPU
+
+            <img class="current-visible" src="images/linus.jpeg" width="50%"/>
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (9) Dockerfile 101 -- X11 forwarding on <br>Nvidia GPU
+
+            Links: 
+            - https://github.com/NVIDIA/nvidia-container-toolkit
+            - https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (10) Dockerfile 101 -- X11 forwarding on <br>Nvidia GPU
+
+            <pre><code data-trim data-noescape data-line-numbers="2,3">
+            $ docker run \
+            --runtime=nvidia \
+            --gpus all \
+            --rm \
+            nvidia/cuda:11.6.2-base-ubuntu20.04 \
+            nvidia-smi
+            </code></pre>
+
+            ```text
+Fri Jun 30 05:11:01 2023       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 515.105.01   Driver Version: 515.105.01   CUDA Version: 11.7     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+...
+
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (11) Dockerfile 101 -- X11 forwarding on <br>Nvidia GPU
+
+
+            <pre><code data-trim data-noescape data-line-numbers="1, 7-10">
+FROM nvidia/opengl:1.2-glvnd-runtime-ubuntu20.04
+RUN apt-get update \
+  && apt-get install -y locales lsb-release gnupg2
+ARG DEBIAN_FRONTEND=noninteractive
+RUN dpkg-reconfigure locales
+# Install ROS Noetic (skipped)
+ENV NVIDIA_VISIBLE_DEVICES \
+    ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES \
+    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics         
+            </code></pre>
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (12) Dockerfile 101 -- X11 forwarding on <br>Nvidia GPU
+
+            ```text
+            $ docker build -t ros_nvidia:noetic .
+            ```
+            (or you call pull it)
+            ```text
+            $ docker pull zhangbaozhe/ros_nvidia:noetic
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👶 (13) Dockerfile 101 -- X11 forwarding on <br>Nvidia GPU
+
+            <pre><code data-trim data-noescape data-line-numbers="2,3">
+            $ docker run -it --net=host \
+            --runtime=nvidia \
+            --gpus all \
+            --env="DISPLAY" \ 
+            --env="QT_X11_NO_MITSHM=1" \
+            --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \ 
+            --rm \ 
+            ros_nvidia:noetic \
+            bash -it -c "roslaunch gazebo_ros empty_world.launch"
+            </code></pre> 
+            
+          </textarea>
+        </section>
+
+
+
 
 
       </section>

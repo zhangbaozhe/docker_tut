@@ -1,0 +1,69 @@
+# new docker file
+FROM nvidia/cudagl:11.4.2-devel-ubuntu20.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -qq \
+    && apt-get install --no-install-recommends -y -qq \
+        git \
+        gnutls-bin \
+        libusb-dev \
+        libfcl-dev \
+        libccd-dev \
+        libcwiid-dev \
+        libspnav-dev \
+        libglvnd-dev \
+        libgl1-mesa-glx \
+        libbluetooth-dev \
+        libgoogle-glog-dev \
+        python3-pip \
+        python3-dbg \
+        python3-venv \
+        python3-empy \
+        python3-numpy \
+        python3-setuptools \
+        vim \
+        nano \
+        xvfb \
+        curl \
+        dbus \
+        gedit \
+        byobu \
+        net-tools \
+        mesa-utils \
+        iputils-ping \
+        protobuf-compiler \
+        software-properties-common \
+    && apt-get install --assume-yes apt-utils \
+    && apt-get --assume-yes upgrade \
+    && apt-get clean -qq 
+
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
+
+RUN # && cd / && git clone https://github.com/PX4/PX4-Autopilot.git --recursive \
+    # && bash ./PX4-Autopilot/Tools/setup/ubuntu.sh && cd PX4-Autopilot && DONT_RUN=1 make px4_sitl_default gazebo \
+    # && apt-get update -qq && apt-get install --assume-yes ros-noetic-desktop-full \
+    && apt-get update && apt-get install --assume-yes ros-noetic-desktop-full ros-noetic-mavros ros-noetic-joy ros-noetic-octomap-ros ros-noetic-octomap-msgs \
+    && cd /opt/ros/noetic/lib/mavros && sudo ./install_geographiclib_datasets.sh \
+    && apt-get install -y -qq ros-noetic-vrpn ros-noetic-ros-control ros-noetic-ros-controllers ros-noetic-gazebo-ros-control \
+    && cd /root && mkdir Lib && cd Lib \
+    && git clone https://github.com/osqp/osqp.git --recursive && cd osqp && mkdir build && cd build && cmake .. && make install \
+    && cd /root/Lib \
+    && git clone https://github.com/robotology/osqp-eigen.git && cd osqp-eigen && mkdir build && cd build && cmake .. && make install \
+    && cd /root && mkdir data
+
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh && echo "Goodd"
+
+RUN apt-get install -y -qq python-is-python3 libboost-all-dev
+
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc \
+    && echo "export ROS_HOSTNAME=localhost" >> ~/.bashrc \
+    && echo "export ROS_MASTER_URI=http://localhost:11311" >> ~/.bashrc 
+    
+ENV NVIDIA_VISIBLE_DEVICES \
+    ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES \
+    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
+
+
