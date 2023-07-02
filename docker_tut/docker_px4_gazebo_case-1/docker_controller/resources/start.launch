@@ -1,0 +1,21 @@
+<launch>
+  <arg name="ip" default="0.0.0.0"></arg>
+  <arg name="id" default="1"></arg>
+  <arg name="r" default="1.0"></arg>
+  <arg name="w" default="0.5"></arg>
+
+  <node pkg="new_swarm_bridge" type="forward.py" name="forward" args="$(arg ip) $(arg id) 'mavros/setpoint_raw/attitude' " output="screen"
+  launch-prefix="bash -c 'sleep 1.0; $0 $@'">
+    <remap from="/0/gazebo/model_states" to="/gazebo/model_states"/>
+  </node>
+
+  <remap from="/mavros/setpoint_raw/attitude" to="/1/mavros/setpoint_raw/attitude" />
+  <include file="$(find control_demo)/launch/mpc.launch" 
+  launch-prefix="bash -c 'sleep 2.0; $0 $@'">
+    <arg name="r" value="$(arg r)"/>
+    <arg name="w" value="$(arg w)"/>
+  </include>
+
+
+
+</launch>

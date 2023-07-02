@@ -1,0 +1,3 @@
+/home/baozhe/FastLab/obstacle_avoidance_ws/src/obstacle_avoidance/acado_model/build/CMakeFiles/rebuild_cache.dir
+/home/baozhe/FastLab/obstacle_avoidance_ws/src/obstacle_avoidance/acado_model/build/CMakeFiles/edit_cache.dir
+/home/baozhe/FastLab/obstacle_avoidance_ws/src/obstacle_avoidance/acado_model/build/CMakeFiles/quadrotor_model_codegen.dir

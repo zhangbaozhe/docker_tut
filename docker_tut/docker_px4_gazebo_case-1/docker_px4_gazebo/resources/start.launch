@@ -1,0 +1,15 @@
+<launch>
+  <arg name="ip" default="0.0.0.0"></arg>
+  <arg name="id" default="0"></arg>
+
+  <remap from="/gazebo/model_states" to="/0/gazebo/model_states" />
+  <include file="$(find px4)/launch/mavros_posix_sitl.launch" >
+  </include>
+
+  <node pkg="new_swarm_bridge" type="forward.py" name="forward" args="$(arg ip) $(arg id) 'gazebo/model_states' " output="screen"
+  launch-prefix="bash -c 'sleep 2.0; $0 $@'">
+    <remap from="/1/mavros/setpoint_raw/attitude" to="/mavros/setpoint_raw/attitude"/>
+  </node>
+
+
+</launch>

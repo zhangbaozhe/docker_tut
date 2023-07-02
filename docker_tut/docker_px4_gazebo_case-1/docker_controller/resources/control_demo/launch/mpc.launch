@@ -1,0 +1,7 @@
+<launch>
+  <arg name="r" default="1.0"/>
+  <arg name="w" default="0.5"/>
+  <node pkg="control_demo" type="node" name="node" output="screen" args="-r $(arg r) -w $(arg w)">
+    <rosparam file="$(find control_demo)/parameters/mpc.yaml" />
+  </node>
+</launch>
