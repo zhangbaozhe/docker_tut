@@ -515,7 +515,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES \
             ## 👦 Case study 1: <br>Containerized simulation on a single machine
 
             - Docker network and storage
-            - Two containers: Gazebo and controller
+            - Two containers: Gazebo simulation (PX4 sitl) and  MPC controller
             
           </textarea>
         </section>
@@ -677,9 +677,9 @@ WORKDIR /
             --gpus all \
             --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" \
             --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-            --rm 
-            zhangbaozhe/ros_nvidia_px4:noetic_simulation 
-            bash -i -c "cd simulation_ws && bash start.bash 172.18.0.10 0" 
+            --rm \
+            zhangbaozhe/ros_nvidia_px4:noetic_simulation \
+            bash -i -c "cd simulation_ws && bash start.bash 172.18.0.10 0 True" 
             </code></pre> 
             
           </textarea>
@@ -693,14 +693,192 @@ WORKDIR /
       <section>
         <section data-markdown>
           <textarea data-template>
-            ## 👨‍🎓 Case study 2: <br>Test your application's parameters with distribute computation
+            ## 👨‍🎓 Case study 2: <br>Test your application's parameters with distributed simulation
 
             - Docker compose
-            - Distributed simulations
+            - Distributed simulation
 
           </textarea>
         </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👨‍🎓 Why compose?
+
+            - Less annoy commands 
+            - Easy resource management 
+              - Containers (CPU and RAM)
+              - Volumes
+              - Networks
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👨‍🎓 Problem Formulation
+
+            - A Fixed MPC controller for quadrotor 
+            - A node for the MPC to track a circle trajectory
+            - (radius, angular velocity) = (r, w) may change
+            - Find the average tracking error for each (r, w) combination in a set
+
+          </textarea>
+        </section>
+
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👨‍🎓 Example 1: Convert last section to compose-style simulation
+
+              <pre><code data-trim data-noescape data-line-numbers="">
+              version: '3'
+              # specify network we are using
+              networks:
+                temp: 
+                  name: temp
+                  external: true
+              # ...
+              </code></pre> 
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👨‍🎓 Example 1: Convert last section to compose-style simulation
+
+              <pre><code data-trim data-noescape data-line-numbers="">
+              # ... 
+              services:
+                sim0: 
+                  image: zhangbaozhe/ros_nvidia_px4:noetic_simulation
+                  networks: 
+                    temp: 
+                      ipv4_address: 172.18.0.10
+                  expose: 
+                    - 5555
+                  volumes: 
+                    - /tmp/.X11-unix:/tmp/.X11-unix:rw
+                    - /etc/localtime:/etc/localtime
+                  environment:
+                    - DISPLAY
+                    - QT_X11_NO_MITSHM=1
+                  deploy: 
+                    resources: 
+                      limits: 
+                        cpus: '2'
+                      reservations: 
+                        devices: 
+                          - driver: nvidia
+                            count: 1
+                            capabilities: [gpu]
+                  command: bash  -c "cd simulation_ws && bash start.bash 172.18.0.10 0 True"
+              # ...
+              </code></pre> 
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👨‍🎓 Example 1: Convert last section to compose-style simulation
+
+              <pre><code data-trim data-noescape data-line-numbers="">
+              # ... 
+                mpc0: 
+                  image: zhangbaozhe/ros_nvidia_px4:noetic_controller
+                  networks: 
+                    temp: 
+                      ipv4_address: 172.18.0.11
+                  expose: 
+                    - 5555
+                  volumes: 
+                    - /tmp/.X11-unix:/tmp/.X11-unix:rw
+                    - /etc/localtime:/etc/localtime
+                    - ./csv/:/simulation_ws/src/control_demo/csv/
+                  environment:
+                    - DISPLAY
+                    - QT_X11_NO_MITSHM=1
+                  deploy: 
+                    resources: 
+                      limits: 
+                        cpus: '2'
+                      reservations: 
+                        devices: 
+                          - driver: nvidia
+                            count: 1
+                            capabilities: [gpu]
+                  command: bash  -c "cd simulation_ws && bash start.bash 172.18.0.11 1 2.0 1.0"
+              </code></pre> 
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👨‍🎓 Example 1: Convert last section to compose-style simulation
+
+            ```text
+            # start
+            $ docker compose up
+            # remove
+            $ docker compose down
+            ```
+            Then you can gather the csv files.
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👨‍🎓 Example 2: Large-Scale Distributed Simulation
+
+            - One simulation takes 10s
+            - You have 200*200 (r, w) combinations
+            - You need 200*200*10/3600=111.1h to do the work
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👨‍🎓 Example 2: Large-Scale Distributed Simulation
+
+            <img class="current-visible" src="images/distributed.png" width="60%"/>
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👨‍🎓 Example 2: Generate a `docker-compose.yml` for large-scale simulation
+
+            - Python script => docker-compose.yml
+            - Different network configurations
+            - Different (r, w) combinations
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ### 👨‍🎓 Example 2: Generate a `docker-compose.yml` for large-scale simulation
+
+            Code and demo
+
+          </textarea>
+        </section>
+
+
       </section>
+      <section data-markdown>
+        <textarea data-template>
+          # 🎉🎉 Thanks 🎉🎉
+
+        </textarea>
+      </section>
+
     </div>
   </div>
 

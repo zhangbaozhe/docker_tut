@@ -1,1 +1,1 @@
-docker run -it --net=temp --ip 172.18.0.10 --runtime=nvidia --gpus all --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --rm zhangbaozhe/ros_nvidia_px4:noetic_simulation bash -i -c "cd simulation_ws && bash start.bash 172.18.0.10 0" 
+docker run -it --net=temp --ip 172.18.0.10 --runtime=nvidia --gpus all --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --rm zhangbaozhe/ros_nvidia_px4:noetic_simulation bash -i -c "cd simulation_ws && bash start.bash 172.18.0.10 0 True" 

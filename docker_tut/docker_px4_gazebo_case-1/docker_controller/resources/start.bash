@@ -1,4 +1,4 @@
-i#!/bin/bash
+#!/bin/bash
 
 # put this script in the workspace dir
 # this is 0

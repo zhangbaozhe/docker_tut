@@ -95,6 +95,7 @@ int main(int argc, char **argv)
         CURRENT_EST.orientation.z() = QUAD_ODOM.pose.pose.orientation.z;
       });
   while (!gazebo_model_states_sub.getNumPublishers()) {
+    ros::Rate(1).sleep();
     ROS_WARN("Waiting for connection");
   }
 

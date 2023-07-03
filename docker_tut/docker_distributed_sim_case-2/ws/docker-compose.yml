@@ -1,0 +1,227 @@
+
+version: '3'
+
+services:
+
+  sim0: 
+    image: zhangbaozhe/ros_nvidia_px4:noetic_simulation
+    networks: 
+      group0: 
+        ipv4_address: 172.20.0.10
+    expose: 
+      - 5555
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '1'
+        reservations: 
+          devices: 
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: bash  -c "cd simulation_ws && bash start.bash 172.20.0.10 0 False"
+  mpc0: 
+    image: zhangbaozhe/ros_nvidia_px4:noetic_controller
+    networks: 
+      group0: 
+        ipv4_address: 172.20.0.11
+    expose: 
+      - 5555
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime
+      - ./csv/:/simulation_ws/src/control_demo/csv/
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '1'
+        reservations: 
+          devices: 
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: bash  -c "cd simulation_ws && bash start.bash 172.20.0.11 1 0.0 0.01 > /dev/null"
+
+  sim1: 
+    image: zhangbaozhe/ros_nvidia_px4:noetic_simulation
+    networks: 
+      group1: 
+        ipv4_address: 172.21.0.10
+    expose: 
+      - 5555
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '1'
+        reservations: 
+          devices: 
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: bash  -c "cd simulation_ws && bash start.bash 172.21.0.10 0 False"
+  mpc1: 
+    image: zhangbaozhe/ros_nvidia_px4:noetic_controller
+    networks: 
+      group1: 
+        ipv4_address: 172.21.0.11
+    expose: 
+      - 5555
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime
+      - ./csv/:/simulation_ws/src/control_demo/csv/
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '1'
+        reservations: 
+          devices: 
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: bash  -c "cd simulation_ws && bash start.bash 172.21.0.11 1 0.0 1.01 > /dev/null"
+
+  sim2: 
+    image: zhangbaozhe/ros_nvidia_px4:noetic_simulation
+    networks: 
+      group2: 
+        ipv4_address: 172.22.0.10
+    expose: 
+      - 5555
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '1'
+        reservations: 
+          devices: 
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: bash  -c "cd simulation_ws && bash start.bash 172.22.0.10 0 False"
+  mpc2: 
+    image: zhangbaozhe/ros_nvidia_px4:noetic_controller
+    networks: 
+      group2: 
+        ipv4_address: 172.22.0.11
+    expose: 
+      - 5555
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime
+      - ./csv/:/simulation_ws/src/control_demo/csv/
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '1'
+        reservations: 
+          devices: 
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: bash  -c "cd simulation_ws && bash start.bash 172.22.0.11 1 1.0 0.01 > /dev/null"
+
+  sim3: 
+    image: zhangbaozhe/ros_nvidia_px4:noetic_simulation
+    networks: 
+      group3: 
+        ipv4_address: 172.23.0.10
+    expose: 
+      - 5555
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '1'
+        reservations: 
+          devices: 
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: bash  -c "cd simulation_ws && bash start.bash 172.23.0.10 0 False"
+  mpc3: 
+    image: zhangbaozhe/ros_nvidia_px4:noetic_controller
+    networks: 
+      group3: 
+        ipv4_address: 172.23.0.11
+    expose: 
+      - 5555
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/localtime:/etc/localtime
+      - ./csv/:/simulation_ws/src/control_demo/csv/
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    deploy: 
+      resources: 
+        limits: 
+          cpus: '1'
+        reservations: 
+          devices: 
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: bash  -c "cd simulation_ws && bash start.bash 172.23.0.11 1 1.0 1.01 > /dev/null"
+
+networks: 
+   
+  group0: 
+    driver: bridge
+    ipam: 
+      config: 
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
+        
+  group1: 
+    driver: bridge
+    ipam: 
+      config: 
+        - subnet: 172.21.0.0/16
+          gateway: 172.21.0.1
+        
+  group2: 
+    driver: bridge
+    ipam: 
+      config: 
+        - subnet: 172.22.0.0/16
+          gateway: 172.22.0.1
+        
+  group3: 
+    driver: bridge
+    ipam: 
+      config: 
+        - subnet: 172.23.0.0/16
+          gateway: 172.23.0.1
+        
