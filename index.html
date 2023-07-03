@@ -45,6 +45,9 @@
             - Case study 1: Containerized simulation on a single machine
             - Case study 2: Test your application's parameters with distributed simulation
             <aside class="notes">
+              主要有四部分
+
+              有三个 case study 
             </aside>
           </textarea>
       </section>
@@ -59,6 +62,12 @@
             - A light-weight virtual machine?
             - Docker image v.s. bootable OS image?
             - Docker container v.s. runtime virtual machine?
+            <aside class="notes">
+              有几个问题
+              是轻量的虚拟机吗
+              docker的镜像和普通的镜像有什么区别
+              docker的容器和运行时的虚拟机又有什么区别
+            </aside>
           </textarea>
         </section>
 
@@ -70,6 +79,10 @@
 
             <img class="current-visible" src="images/docker_vm.png" width="100%" />
 
+            <aside class="notes">
+              操作系统
+            </aside>
+
           </textarea>
         </section>
 
@@ -80,6 +93,9 @@
             <img class="current-visible" src="images/docker_vm.png" width="50%" />
 
             > A Docker image is an <span style="color:red">**isolated filesystem**</span> containing all dependencies, configurations, scripts, binaries, etc for your container application. 
+            <aside class="notes">
+              没有额外的boot启动的东西
+            </aside>
           </textarea>
         </section>
 
@@ -90,6 +106,9 @@
             <img class="current-visible" src="images/docker_vm.png" width="50%" />
 
             > A container is a <span style="color:red">**sandboxed process**</span> on your machine that is <span style="color:red">**isolated**</span> from all other processes on the host machine. 
+            <aside class="notes">
+              只是一个沙盒的进程，比如bash，当然这个进程也可以fork出很多子进程
+            </aside>
 
           </textarea>
         </section>
@@ -100,6 +119,10 @@
             ### 🤓 Docker Architecture
 
             <img class="current-visible" src="images/architecture.svg" width="100%" />
+
+            <aside class="notes">
+              client-server
+            </aside>
 
           </textarea>
         </section>
@@ -239,6 +262,13 @@
 
             We'll cover both by building customized images. 
 
+            <aside class="notes">
+              两个主要的选择
+
+              linux x 桌面系统 docker 的 GUI 程序 投射到 host 主机上
+
+              远程桌面
+            </aside>
             
           </textarea>
         </section>
