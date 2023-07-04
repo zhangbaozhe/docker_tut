@@ -41,9 +41,9 @@
             - Introduction
               - What is Docker? 
               - Why/When you should use it?
-            - Case study 0: Setup a containerized development environment (including GUI application)
-            - Case study 1: Containerized simulation on a single machine
-            - Case study 2: Test your application's parameters with distributed simulation
+            - 👶 Case study 0: Setup a containerized development environment (including GUI application)
+            - 👦 Case study 1: Containerized simulation on a single machine
+            - 👨‍🎓 Case study 2: Test your application's parameters with distributed simulation
             <aside class="notes">
               主要有四部分
 
@@ -75,9 +75,37 @@
         <section data-markdown>
           <textarea data-template>
 
-            ### 🤓 Virtual Machine v.s. Docker
+            ### 🤓 How VM works
 
-            <img class="current-visible" src="images/docker_vm.png" width="100%" />
+            <img class="current-visible" src="images/vm.png" width="80%" />
+
+            <aside class="notes">
+              操作系统
+            </aside>
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+
+            ### 🤓 How Docker works
+
+            <img class="current-visible" src="images/docker.png" width="80%" />
+
+            <aside class="notes">
+              操作系统
+            </aside>
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+
+            ### 🤓 VM v.s. Docker
+
+            <img class="current-visible" src="images/docker_vm.png" width="80%" />
 
             <aside class="notes">
               操作系统
@@ -90,7 +118,7 @@
           <textarea data-template>
             ### 🤓 Docker Image
 
-            <img class="current-visible" src="images/docker_vm.png" width="50%" />
+            <img class="current-visible" src="images/docker.png" width="40%" />
 
             > A Docker image is an <span style="color:red">**isolated filesystem**</span> containing all dependencies, configurations, scripts, binaries, etc for your container application. 
             <aside class="notes">
@@ -103,7 +131,7 @@
           <textarea data-template>
             ### 🤓 Docker Container
 
-            <img class="current-visible" src="images/docker_vm.png" width="50%" />
+            <img class="current-visible" src="images/docker.png" width="40%" />
 
             > A container is a <span style="color:red">**sandboxed process**</span> on your machine that is <span style="color:red">**isolated**</span> from all other processes on the host machine. 
             <aside class="notes">
@@ -137,9 +165,9 @@
               - Distributed computation (simulation)
             - Need to setup a complex programming environment
               - ROS, OpenCV, pytorch, boost, ... all needed
-            - Package "pollution"
+            - Package "pollution" 
               - Feature test for third-party packages
-              - Avoiding "polluting" you system dependencies (apt)
+              - Avoiding "polluting" you system dependencies => sandboxed isolation
             - ...
 
           </textarea>
@@ -365,6 +393,10 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
         <section data-markdown>
           <textarea data-template>
             ### 👶 (5) Dockerfile 101 -- Enable remote desktop GUI
+
+            ```text
+            $ docker run --rm -it --net=host zhangbaozhe/ros_xrdp:noetic 
+            ```
 
             Demo (127.0.0.1:3389)
 
@@ -865,8 +897,8 @@ WORKDIR /
             ### 👨‍🎓 Example 2: Large-Scale Distributed Simulation
 
             - One simulation takes 10s
-            - You have 200*200 (r, w) combinations
-            - You need 200*200*10/3600=111.1h to do the work
+            - You have 200x200 (r, w) combinations
+            - You need 200x200x10/3600=111.1h to do the work
 
           </textarea>
         </section>

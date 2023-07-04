@@ -34,7 +34,14 @@ sudo systemctl restart docker
 
 ### Pull required images
 
+Just run 
 ```text
+bash pull.bash
+```
+to pull the following images
+```text
+docker pull osrf/ros:noetic-desktop-full
+docker pull nvidia/cuda:11.6.2-base-ubuntu20.04
 docker pull zhangbaozhe/ros:noetic
 docker pull zhangbaozhe/ros_xrdp:noetic
 docker pull zhangbaozhe/ros_nvidia:noetic

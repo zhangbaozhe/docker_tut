@@ -49,7 +49,7 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-    command: bash  -c "cd simulation_ws && bash start.bash 172.20.0.11 1 0.0 0.01 > /dev/null"
+    command: bash  -c "cd simulation_ws && bash start.bash 172.20.0.11 1 0.0 0.01"
 
   sim1: 
     image: zhangbaozhe/ros_nvidia_px4:noetic_simulation
@@ -97,7 +97,7 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-    command: bash  -c "cd simulation_ws && bash start.bash 172.21.0.11 1 0.0 1.01 > /dev/null"
+    command: bash  -c "cd simulation_ws && bash start.bash 172.21.0.11 1 0.0 1.01"
 
   sim2: 
     image: zhangbaozhe/ros_nvidia_px4:noetic_simulation
@@ -145,7 +145,7 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-    command: bash  -c "cd simulation_ws && bash start.bash 172.22.0.11 1 1.0 0.01 > /dev/null"
+    command: bash  -c "cd simulation_ws && bash start.bash 172.22.0.11 1 1.0 0.01"
 
   sim3: 
     image: zhangbaozhe/ros_nvidia_px4:noetic_simulation
@@ -193,7 +193,7 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-    command: bash  -c "cd simulation_ws && bash start.bash 172.23.0.11 1 1.0 1.01 > /dev/null"
+    command: bash  -c "cd simulation_ws && bash start.bash 172.23.0.11 1 1.0 1.01"
 
 networks: 
    

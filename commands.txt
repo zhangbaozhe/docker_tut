@@ -1,0 +1,103 @@
+/*
+ * @File: commands.txt
+ * @Brief: The file contains the commands used in the slide show. 
+ *         Each command is specified with the corresponding page and 
+ *         the corresponding file directory to use it, making it easy 
+ *         copy and paste to your terminal ;)
+ * @Author: Baozhe ZHANG 
+ * @Date: 2023-07-04 19:08:59 
+ * @Last Modified by: Baozhe ZHANG
+ * @Last Modified time: 2023-07-04 19:42:42
+ */
+
+
+=================== Page 14 ===================
+docker pull osrf/ros:noetic-desktop-full
+=================== Page 14 ===================
+
+
+=================== Page 15 ===================
+docker run --rm -it --name ros osrf/ros:noetic-desktop-full bash
+=================== Page 15 ===================
+
+
+=================== Page 21 ===================
+# build in ./docker_tut/docker_build_image_case-0-1/
+docker build -t zhangbaozhe/ros:noetic .
+# pull 
+docker pull zhangbaozhe/ros:noetic
+=================== Page 21 ===================
+
+=================== Page 23 ===================
+# build in ./docker_tut/docker_build_image_case-0-3/
+docker build -t zhangbaozhe/ros_xrdp:noetic .
+# pull 
+docker pull zhangbaozhe/ros_xrdp:noetic
+=================== Page 23 ===================
+
+=================== Page 24 ===================
+docker run --rm -it --net=host zhangbaozhe/ros_xrdp:noetic
+=================== Page 24 ===================
+
+
+=================== Page 26 ===================
+docker run -it --net=host --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --rm osrf/ros:noetic-desktop-full bash -it -c "roslaunch gazebo_ros empty_world.launch"
+=================== Page 26 ===================
+
+
+=================== Page 28 ===================
+docker run -it --net=host --device=/dev/dri:/dev/dri --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --rm osrf/ros:noetic-desktop-full bash -it -c "roslaunch gazebo_ros empty_world.launch"
+=================== Page 28 ===================
+
+
+=================== Page 28 ===================
+docker run --runtime=nvidia --gpus all --rm nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
+=================== Page 28 ===================
+
+
+=================== Page 33 ===================
+# build in ./docker_tut/docker_build_image_case-0-11/
+docker build -t zhangbaozhe/ros_nvidia:noetic .
+# pull
+docker pull zhangbaozhe/ros_nvidia:noetic
+=================== Page 33 ===================
+
+
+=================== Page 34 ===================
+docker run -it --net=host --runtime=nvidia --gpus all --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --rm zhangbaozhe/ros_nvidia:noetic bash -it -c "roslaunch gazebo_ros empty_world.launch"
+=================== Page 34 ===================
+
+
+=================== Page 39 ===================
+docker network create --subnet=172.18.0.0/16 temp
+=================== Page 39 ===================
+
+
+=================== Page 44 ===================
+docker run -it --net=temp --ip 172.18.0.11 --runtime=nvidia --gpus all --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --rm -v ./csv/:/simulation_ws/src/control_demo/csv/ zhangbaozhe/ros_nvidia_px4:noetic_controller bash -i -c "cd simulation_ws && bash start.bash 172.18.0.11 1 1.0 0.5"
+=================== Page 44 ===================
+
+
+=================== Page 45 ===================
+docker run -it --net=temp --ip 172.18.0.10 --runtime=nvidia --gpus all --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --rm zhangbaozhe/ros_nvidia_px4:noetic_simulation bash -i -c "cd simulation_ws && bash start.bash 172.18.0.10 0 True" 
+=================== Page 45 ===================
+
+
+=================== Page 52 ===================
+# in ./docker_tut/docker_distributed_sim_case-2/one
+# start
+docker compose up
+# remove
+docker compose down
+=================== Page 52 ===================
+
+
+=================== Page 56 ===================
+# in ./docker_tut/docker_distributed_sim_case-2/ws
+python generate_compose.py 2 1 1
+
+# start
+docker compose up
+# remove
+docker compose down
+=================== Page 56 ===================
