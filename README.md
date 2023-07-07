@@ -38,6 +38,7 @@ sudo nvidia-ctk runtime configure --runtime=docker
 sudo systemctl restart docker
 ```
 <p style="color:red">If your apt has trouble locating `nvidia-container-toolkit-base` package, you need to use the following commands to add Nvidia's source list</p>
+
 ```text
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
