@@ -15,6 +15,17 @@ If you want to run the samples in the slides, you need to install `nvidia-docker
 Follow the official document. 
 https://docs.docker.com/engine/install/
 
+### Important Notes
+
+1. If your laptop does not support GPU directly connecting to 
+   your laptop's display, then most of the Nvidia's image
+   might not use your Nvidia GPU to render the graphics.
+   You can use `--device=/dev/dri:/dev/dri` to leverage your
+   integrated GPU to render the graphics.
+2. Before every X11 forwarding, you should type 
+   `xhost +` in your terminal to let the xorg allow 
+   the forwarding. 
+
 ### Install `nvidia-docker`
 
 <p style="color:red">Please read the following links before proceeding</p>
